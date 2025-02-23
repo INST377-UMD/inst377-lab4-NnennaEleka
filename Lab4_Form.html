@@ -1,0 +1,112 @@
+<html>
+    <head>
+        <Title>INST377 - Lab 4: Javascript</Title>
+    </head>
+
+    <body>
+        <h1 id="header">INST377 - Lab 4</h1>
+       
+
+        <div class="main-container">
+            <form name="contactForm" onsubmit="formValidation(this);return false;">
+              <div class = "main-style">  
+                <label for="firstName">First Name:</label>
+                <input type="text" placeholder="John Doe" id="firstName">
+                <br>
+                <br>
+                <input type="submit" value="Alert Me">
+             </div>
+
+            </form>
+
+            <form name="testerForm" onsubmit="formValidation(this);return false;">
+                <div class = "main-style">  
+                    <label for="tester">Text Tester:</label>
+                    <input type="text" placeholder="Word Doe" id="tester">
+                    <br>
+                    <br>
+                    <input type="submit" value="Validate Text">
+                 </div>
+            </form>
+            
+            <div class = "main-style">
+                <button onclick="changeColor()">CHANGE COLOR</button>
+            </div>
+            <br>
+            <div class = "main-style">
+                <button onclick="addText()">ADD TEXT</button>
+            </div>
+        
+
+
+        </div>
+
+     
+
+        <!-- Java Script Code -->
+        <script type=" text/javascript">
+            document.body.style.backgroundColor = 'yellow';
+            document.querySelectorAll(".main-style").forEach(div => {
+                div.style.backgroundColor = "lightBlue";
+                div.style.padding= "10px";
+                div.style.border= "20px solid lightGreen";
+                div.style.borderRadius= "20px";
+            });
+        
+            function formValidation(form) {
+                        let inputField;
+                        let fieldName;
+
+                <!-- Lets me test which form it is -->
+                if (form.name == "contactForm") {
+                    inputField = form.firstName;
+                    fieldName = "first name";
+                } else if (form.name == "testerForm") {
+                    inputField = form.tester;
+                    fieldName = "word to test";
+                } else {
+                    return false;
+                }
+
+                const text = inputField.value;
+                const validationRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
+                console.log('validating user input: ', text)
+                
+                if(text.trim()=="") {
+                    alert(`Enter valid ${fieldName}!`)
+                    return false;
+                }
+
+                if(validationRegex.test(text)) {
+                    alert('How about nah..no special characters duh.')
+                    return false;
+                }
+
+                if(inputField==form.firstName) {
+                alert('Hi '+ text + '!')
+                }
+                
+            }
+
+
+            
+            function changeColor() {
+                console.log('Trying to change color, current color: ', document.body.style.backgroundColor)
+
+                if(document.body.style.backgroundColor == 'yellow') {
+                    document.body.style.backgroundColor = 'pink';
+                } else {
+                    document.body.style.backgroundColor = 'yellow';
+                }
+
+                
+                console.log('Successfully changed color, current color: ', document.body.style.backgroundColor)
+            }
+
+            function addText() {
+               document.getElementById('header').textContent += ' - Add Text'
+            }
+        </script>
+    </body>
+</html>
